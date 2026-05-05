@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 1: Pengantar Manajemen Strategi | Miranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-pink: #ff4081;
+            --deep-berry: #6a1b9a;
+            --soft-lavender: #e1bee7;
+            --text-dark: #512da8;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffd1dc 50%, #e1bee7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 5px; 
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: 45px; 
+            border-radius: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.1);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--deep-berry);
+            font-weight: 800;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        .materi-label {
+            font-weight: 800; 
+            font-size: 0.7em; 
+            color: var(--deep-berry); 
+            letter-spacing: 1.5px; 
+            opacity: 0.6;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .material-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(106, 27, 154, 0.05);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chapter-tag {
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        h2 {
+            color: var(--deep-berry);
+            font-weight: 800;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+
+        h2 i {
+            color: var(--primary-pink);
+        }
+
+        h3 {
+            color: var(--primary-pink);
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            opacity: 0.9;
+            text-align: left;
+        }
+
+        .point-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8em;
+            font-weight: 700;
+            opacity: 0.5;
+            color: var(--deep-berry);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { margin: 10px; top: 5px; height: 40px; }
+            .material-card { padding: 25px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <header class="top-bar">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </a>
+        <div class="materi-label">MATERI 1</div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="material-card">
+            <div class="header-section reveal">
+                <span class="chapter-tag">Materi 1</span>
+                <h1>Manajemen Strategi</h1>
+            </div>
+
+            <div class="divider reveal"></div>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-book"></i> PENGERTIAN MANAJEMEN STRATEGI</h2>
+                <p>Proses menemukan, mengimplementasikan, dan mengevaluasi keputusan untuk mencapai tujuan organisasi. Manajemen adalah kosa kata yang berasal dari bahasa Perancis kuno, yaitu menegement yang berarti seni melaksanakan dan mengatur. Atau serangkaian keputusan dan tindakan mendasar yang dibuat oleh manajemen puncak dan diimplementasikan oleh seluruh jajaran suatu organisasi dalam rangka pencapaian tujuan organisasi tersebut.</p>
+                
+                <div class="point-box">
+                    <p><strong>Menurut Fred R. David:</strong> manajemen strategi adalah seni dan pengetahuan dalam merumuskan, mengimplementasikan, serta mengevaluasi keputusan-keputusan lintas fungsional yang memungkinkan sebuah organisasi untuk mencapai tujuan.</p>
+                    <p style="margin-bottom: 0;"><strong>Menurut Sondang P. Siagian:</strong> manajemen adalah kemampuan atau ketrampilan untuk memperoleh sesuatu hasil dalam rangka pencapaian tujuan melalui kegiatan-kegiatan orang lain.</p>
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-layer-group"></i> FUNGSI MANAJEMEN STRATEGI</h2>
+                <ol>
+                    <li><strong>Mengusung Visi Misi Perusahaan:</strong> Setiap perusahaan wajib mempunyai visi dan misi untuk dijadikan sebagai pedoman dan esensi utama pada eksistensi bisnisnya.</li>
+                    <li><strong>Membantu Perusahaan Mengidentifikasi Pasar dan Produk:</strong> Kompetisi dan persaingan dalam dunia bisnis umumnya sangat ketat. Oleh karena itu, perusahaan wajib mempunyai produk yang dapat bersaing di pasaran dengan kuat.</li>
+                    <li><strong>Memberi Fokus pada Aktivitas Brand Positioning:</strong> Setiap perusahaan pasti mempunyai brand positioning berbeda di mata para konsumennya. Pemanfaatan manajemen strategis mampu membantu perusahaan dalam mempertahankan, sekaligus memperkuat posisi mereknya di masyarakat.</li>
+                    <li><strong>Menjaga Keteraturan Bisnis:</strong> Tidak hanya itu, fungsi manajemen strategis lainnya adalah mampu menetapkan pandangan dan tujuan apabila setiap divisi pada perusahaan mampu memiliki sinergi dan menjalankannya dengan baik.</li>
+                    <li><strong>Menjadi Panduan pada Aktivitas Perencanaan dan Juga Perbaikan:</strong> Fungsi terakhir dari manajemen strategis adalah menjadi panduan terhadap kemampuan perusahaan dalam melaksanakan aktivitas bisnis pada jalan yang ideal.</li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-star"></i> MANFAAT MANAJEMEN STRATEGI</h2>
+                <ul>
+                    <li>Meminimalisir terjadinya kesalahan dalam pengambilan keputusan yang mengakibatkan kerugian bagi perusahaan.</li>
+                    <li>Mendukung perencanaan yang telah ditetapkan sebelumnya.</li>
+                    <li>Mendesain kerangka kerja yang ditujukan bagi setiap individu dalam perusahaan.</li>
+                    <li>Meningkatkan nilai perusahaan agar bisa bersaing dengan kompetitor.</li>
+                    <li>Membantu memaksimalkan sumber daya.</li>
+                    <li>Membantu perusahaan fokus pada tujuan.</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-eye"></i> VISI & MISI MANAJEMEN STRATEGI</h2>
+                
+                <h3>VISI</h3>
+                <p>Visi adalah gambaran atau pandangan jangka panjang mengenai kondisi atau tujuan yang ingin dicapai oleh organisasi di masa depan. Visi menjadi arah dan pedoman bagi seluruh kegiatan.</p>
+                
+                <p><strong>Menurut para ahli:</strong></p>
+                <ul>
+                    <li><strong>Fred R. David:</strong> Visi adalah pernyataan mengenai keadaan masa depan yang ingin dicapai oleh organisasi.</li>
+                    <li><strong>Kotler:</strong> Visi merupakan gambaran masa depan organisasi yang memberikan arah dan motivasi bagi seluruh anggota.</li>
+                </ul>
+
+                <p><strong>Ciri ciri visi yang baik:</strong> Berorientasi masa depan, Singkat dan jelas, Memberikan inspirasi dan motivasi, Mudah dipahami seluruh anggota organisasi.</p>
+
+                <h3>KOMPONEN VISI</h3>
+                <ol>
+                    <li>Gambaran masa depan: Menjelaskan kondisi yang ingin dicapai organisasi di masa mendatang.</li>
+                    <li>Nilai dan prinsip organisasi: Menggambarkan nilai-nilai yang dijunjung oleh organisasi.</li>
+                    <li>Arah dan tujuan jangka panjang: Menunjukkan arah perkembangan organisasi dalam jangka panjang.</li>
+                    <li>Inspiratif dan memotivasi: Visi harus mampu memberikan semangat bagi seluruh anggota organisasi.</li>
+                    <li>Mudah Dipahami: Pernyataan visi harus sederhana, jelas, dan mudah dimengerti oleh semua pihak.</li>
+                </ol>
+
+                <h3>Tujuan Visi</h3>
+                <ul>
+                    <li>Memberikan arah perkembangan organisasi di masa depan.</li>
+                    <li>Menjadi pedoman dalam penyusunan strategi organisasi.</li>
+                    <li>Memberikan motivasi bagi seluruh anggota organisasi.</li>
+                    <li>Menyatukan tujuan dan komitmen seluruh anggota organisasi.</li>
+                    <li>Menjadi dasar dalam pengambilan keputusan strategis.</li>
+                </ul>
+
+                <h3>Karakteristik Visi</h3>
+                <p>Visi adalah gambaran masa depan yang ingin dicapai. Berorientasi jangka panjang (masa depan). Inspiratif dan memotivasi orang-orang di dalam organisasi. Singkat, jelas, dan mudah diingat. Bersifat umum (tidak terlalu detail). Menjadi arah atau tujuan utama.</p>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-bullseye"></i> PENGERTIAN MISI</h2>
+                <p>Misi adalah pernyataan mengenai tujuan utama organisasi serta cara yang dilakukan untuk mencapai visi yang telah ditetapkan. Misi menjelaskan kegiatan utama organisasi dan peran organisasi bagi masyarakat atau pihak yang dilayani. Menurut Pearce dan Robinson, misi adalah pernyataan yang menggambarkan tujuan dasar organisasi serta aktivitas utama yang dilakukan untuk mencapai tujuan tersebut.</p>
+
+                <h3>Karakteristik Misi</h3>
+                <p>Misi adalah langkah atau cara untuk mencapai visi. Lebih spesifik dan operasional. Berorientasi pada tindakan (action-oriented). Menjelaskan apa yang dilakukan organisasi. Fokus pada kegiatan saat ini dan jangka menengah. Bisa terdiri dari beberapa poin.</p>
+
+                <h3>Komponen Misi</h3>
+                <p>Menurut Fred R. David, terdapat beberapa komponen penting dalam pernyataan misi organisasi, yaitu:</p>
+                <ol>
+                    <li>Pelanggan (Customer): Menjelaskan siapa yang dilayani oleh organisasi.</li>
+                    <li>Produk atau jasa (Product/Service): Menjelaskan produk atau layanan yang diberikan.</li>
+                    <li>Pasar (Market): Menjelaskan wilayah atau pasar yang dilayani organisasi.</li>
+                    <li>Teknologi (Technology): Menjelaskan teknologi yang digunakan dalam operasional.</li>
+                    <li>Perhatian terhadap pertumbuhan dan keuntungan: Menunjukkan komitmen organisasi terhadap perkembangan dan keberlanjutan.</li>
+                    <li>Filosofi perusahaan: Menjelaskan nilai-nilai atau prinsip yang dianut organisasi.</li>
+                    <li>Citra perusahaan: Menunjukkan bagaimana organisasi ingin dikenal oleh masyarakat.</li>
+                    <li>Perhatian terhadap karyawan: Menunjukkan perhatian organisasi terhadap kesejahteraan karyawan.</li>
+                </ol>
+
+                <h3>Tujuan Misi:</h3>
+                <ul>
+                    <li>Menjelaskan tujuan utama organisasi.</li>
+                    <li>Memberikan arah dalam menjalankan kegiatan operasional.</li>
+                    <li>Menjadi pedoman dalam pengambilan keputusan manajemen.</li>
+                    <li>Membantu organisasi dalam menyusun strategi yang tepat.</li>
+                    <li>Memberikan identitas organisasi kepada masyarakat.</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-link"></i> Hubungan Visi dan Misi</h2>
+                <p>Visi dan misi merupakan dasar dalam proses manajemen strategi. Hubungan keduanya dapat digambarkan sebagai berikut:</p>
+                <div class="point-box" style="text-align: center; font-weight: 700;">
+                    Visi – Misi – Tujuan – Strategi – Program – Kegiatan
+                </div>
+                <ul>
+                    <li><strong>Visi:</strong> menunjukkan tujuan jangka panjang organisasi.</li>
+                    <li><strong>Misi:</strong> menjelaskan cara untuk mencapai visi tersebut.</li>
+                    <li><strong>Strategi:</strong> merupakan langkah-langkah yang dilakukan organisasi untuk mencapai tujuan.</li>
+                </ul>
+            </section>
+
+            <div class="divider reveal"></div>
+            
+            <footer class="reveal">
+                &copy; 2026 Miranda - Manajemen Strategi | All Rights Reserved 
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const scrollReveal = () => {
+            const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", scrollReveal);
+        window.addEventListener("load", scrollReveal);
+    </script>
+
+</body>
+</html>

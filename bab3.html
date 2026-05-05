@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 3: Komponen Visi dan Misi Tujuan | Miranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-pink: #ff4081;
+            --deep-berry: #6a1b9a;
+            --soft-lavender: #e1bee7;
+            --text-dark: #512da8;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffd1dc 50%, #e1bee7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 5px; 
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: 45px; 
+            border-radius: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.1);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--deep-berry);
+            font-weight: 800;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        .materi-label {
+            font-weight: 800; 
+            font-size: 0.7em; 
+            color: var(--deep-berry); 
+            letter-spacing: 1.5px; 
+            opacity: 0.6;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .material-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(106, 27, 154, 0.05);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chapter-tag {
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        h2 {
+            color: var(--deep-berry);
+            font-weight: 800;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+
+        h2 i {
+            color: var(--primary-pink);
+        }
+
+        h3 {
+            color: var(--primary-pink);
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            opacity: 0.9;
+            text-align: left;
+        }
+
+        .point-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8em;
+            font-weight: 700;
+            opacity: 0.5;
+            color: var(--deep-berry);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { margin: 10px; top: 5px; height: 40px; }
+            .material-card { padding: 25px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <header class="top-bar">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </a>
+        <div class="materi-label">MATERI 3</div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="material-card">
+            <div class="header-section reveal">
+                <span class="chapter-tag">Materi 3</span>
+                <h1>Komponen Visi, Misi & Tujuan Perusahaan</h1>
+            </div>
+
+            <div class="divider reveal"></div>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-layer-group"></i> KOMPONEN VISI DAN MISI TUJUAN PERUSAHAAN</h2>
+                <p>Visi dan misi perusahaan merupakan fondasi strategis yang menentukan arah masa depan (visi) dan langkah operasional saat ini (misi). Komponen utamanya meliputi pelanggan, produk/jasa, pasar, teknologi, kelangsungan bisnis, filosofi, konsep diri, citra publik, dan perhatian pada karyawan. Tujuan perusahaan berfokus pada hasil spesifik seperti profitabilitas dan kepuasan pelanggan.</p>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-eye"></i> VISI</h2>
+                <p>Visi adalah gambaran atau pandangan jangka panjang mengenal kondisi atau tujuan yang ingin dicapai oleh organisasi di masa depan. Visi menjadi arah dan pedoman bagi seluruh kegiatan.</p>
+                
+                <p><strong>Menurut para ahli:</strong></p>
+                <ul>
+                    <li>Fred R. David: Visi adalah pernyataan mengenai keadaan masa depan yang ingin dicapai oleh organisasi.</li>
+                    <li>Kotler: Visi merupakan gambaran masa depan organisasi yang memberikan arah dan motivasi bagi seluruh anggota.</li>
+                </ul>
+
+                <p><strong>Ciri ciri visi yang baik:</strong></p>
+                <ul>
+                    <li>Berorientasi masa depan</li>
+                    <li>Singkat dan jelas</li>
+                    <li>Memberikan inspirasi dan motivasi</li>
+                    <li>Mudah dipahami seluruh anggota organisasi</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-bullseye"></i> MISI</h2>
+                <p>Misi adalah pernyataan mengenai tujuan utama organisasi serta cara yang dilakukan untuk mencapai visi yang telah ditetapkan. Misi menjelaskan kegiatan utama organisasi dan peran organisasi bagi masyarakat atau pihak yang dilayani. Menurut Pearce dan Robinson, mis adalah pernyataan yang menggambarkan tujuan dasar organisasi serta aktivitas utama yang dilakukan untuk mencapai tujuan tersebut.</p>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-list-check"></i> KOMPONEN VISI</h2>
+                <ol>
+                    <li>Tujuan Utama: Gambaran besar apa yang ingin dicapai di masa depan.</li>
+                    <li>Core Values (Nilai Inti): Prinsip dasar yang dipegang teguh.</li>
+                    <li>Cara Mencapai: Arah umum tindakan yang diambil.</li>
+                    <li>Sasaran Umum: Cita-cita jangka panjang</li>
+                </ol>
+
+                <h2><i class="fa-solid fa-clipboard-list"></i> KOMPONEN MISI</h2>
+                <ol>
+                    <li>Pelanggan: Siapa target konsumen</li>
+                    <li>Produk atau jasa: Apa yang ditawarkan</li>
+                    <li>Pasar: Dimana perusahaan bersaing</li>
+                    <li>Teknologi: Bagaimana teknologi digunakan</li>
+                    <li>Kelangsungan Bisnis: Komitmen pada pertumbuhan dan keuangan</li>
+                    <li>Filosofi: Nilai dan etika dasar</li>
+                    <li>Konsep diri: Keunggulan kompetitif</li>
+                    <li>Citra public: Tanggung jawab social</li>
+                    <li>Perhatian pada karyawan: Nilai SDM</li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-chart-line"></i> KOMPONEN TUJUAN PERUSAHAAN</h2>
+                <ul>
+                    <li>Finansial: Target omset, profit, atau nilai saham</li>
+                    <li>Customer: Tingkap kepuasan dan loyalitas pelanggan</li>
+                    <li>Internal bisnis: Efisiensi operasional dan kualitas produk</li>
+                    <li>Learning & growth: Pengembangan tim dan inovasi</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-arrows-left-right"></i> PERBEDAAN VISI & MISI PERUSAHAAN</h2>
+                <div class="point-box">
+                    <p><strong>1. VISI</strong></p>
+                    <ul>
+                        <li>Tujuan jangka panjang untuk masa depan</li>
+                        <li>Bersifat umum dan aspiratif</li>
+                        <li>EX ‘Menjadi perusahaan energy terbarukan terdepan di Asia’</li>
+                    </ul>
+                    <p><strong>2. MISI</strong></p>
+                    <ul>
+                        <li>Menekankan pada tindakan dan pencapaian spesifik</li>
+                        <li>Bersifat konkret dan focus pada saat ini</li>
+                        <li>Ex ‘Menyediakan solusi energy terbarukan yang terjangkau’</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-leaf"></i> KOMPONEN VISI PERUSAHAAN</h2>
+                <ol>
+                    <li>Core value: Perusahaan berfokus pada keberlanjutan lingkungan</li>
+                    <li>Tujuan organisasi: Memimpin industry energy terbarukan di Asia Tenggara</li>
+                    <li>Cara mencapai tujuan: Fokus pada pengembangan teknologi dan inovasi</li>
+                    <li>Sasaran umum: Menjadi perusahaan energy terbarukan terdepan di Asia Tenggara dalam 10 tahun ke depan.</li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-briefcase"></i> KOMPONEN MISI PERUSAHAAN</h2>
+                <ol>
+                    <li>Pelanggan: Masyarakat, bisnis, dan pemerintah</li>
+                    <li>Produk/layanan: Solusi energy terbarukan.</li>
+                    <li>Pasar: Asia Tenggara</li>
+                    <li>Teknologi: Teknologi energi terbarukan</li>
+                    <li>Kepedulian kelangsungan bisnis: Berkomitmen pada pembangunan berkelanjutan</li>
+                    <li>Filosofi: Kepercayaan dan kemitraan</li>
+                    <li>Self-concept: Akselator transisi energy terbarukan</li>
+                    <li>Kepedulian terhadap citra public: Perusahaan bertanggung jawab terhadap lingkungan</li>
+                    <li>Kepedulian terhadap karyawan: Mendorong karyawan untuk bekerja dengan cara yang ramah lingkungan.</li>
+                </ol>
+            </section>
+
+            <div class="divider reveal"></div>
+            
+            <footer class="reveal">
+                &copy; 2026 Miranda - Manajemen Strategi | All Rights Reserved
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

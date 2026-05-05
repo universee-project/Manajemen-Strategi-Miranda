@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 4: Audit Strategi dan Analisis Lingkungan Bisnis | Miranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-pink: #ff4081;
+            --deep-berry: #6a1b9a;
+            --soft-lavender: #e1bee7;
+            --text-dark: #512da8;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffd1dc 50%, #e1bee7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 5px; 
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: 45px; 
+            border-radius: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.1);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--deep-berry);
+            font-weight: 800;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        .materi-label {
+            font-weight: 800; 
+            font-size: 0.7em; 
+            color: var(--deep-berry); 
+            letter-spacing: 1.5px; 
+            opacity: 0.6;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .material-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(106, 27, 154, 0.05);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chapter-tag {
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        h2 {
+            color: var(--deep-berry);
+            font-weight: 800;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+
+        h2 i {
+            color: var(--primary-pink);
+        }
+
+        h3 {
+            color: var(--primary-pink);
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            opacity: 0.9;
+            text-align: left;
+        }
+
+        .point-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8em;
+            font-weight: 700;
+            opacity: 0.5;
+            color: var(--deep-berry);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { margin: 10px; top: 5px; height: 40px; }
+            .material-card { padding: 25px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <header class="top-bar">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </a>
+        <div class="materi-label">MATERI 4</div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="material-card">
+            <div class="header-section reveal">
+                <span class="chapter-tag">Materi 4</span>
+                <h1>Audit Strategi & Analisis Lingkungan Bisnis</h1>
+            </div>
+
+            <div class="divider reveal"></div>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-magnifying-glass-chart"></i> AUDIT STRATEGI DAN ANALISIS LINGKUNGAN BISNIS</h2>
+                <p>Audit strategi adalah evaluasi objektif dan sistematis terhadap rencana, implementasi, dan hasil kinerja perusahaan untuk memastikan kesesuaian dengan tujuan jangka panjang. Ini melibatkan analisis lingkungan internal (kekuatan/kelemahan) dan eksternal (peluang/ancaman) menggunakan alat seperti SWOT, PEST, dan Porter’s Five Forces untuk merumuskan strategi yang kompetitif.</p>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-microchip"></i> KOMPONEN UTAMA AUDIT STRATEGI DAN ANALISIS LINGKUNGAN</h2>
+                <ol>
+                    <li>
+                        <strong>Analisis Lingkungan Eksternal (Makro & Industri):</strong>
+                        <ul>
+                            <li>Lingkungan Makro (PESTLE): Menganalisis faktor Politik, Ekonomi, Sosial, Teknologi, Hukum, dan Lingkungan yang di luar kendali perusahaan.</li>
+                            <li>Lingkungan Industri (Porter's Five Forces): Menilai ancaman pendatang baru, kekuatan pemasok, kekuatan pembeli, ancaman produk pengganti, dan persaingan antarpesaing.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Analisis Lingkungan Internal:</strong>
+                        <p>Mengevaluasi kompetensi inti, struktur organisasi, budaya perusahaan, sumber daya manusia, dan keuangan untuk mengidentifikasi kekuatan dan kelemahan</p>
+                    </li>
+                    <li>
+                        <strong>.Analisis SWOT/TOWS:</strong>
+                        <p>Mengombinasikan temuan internal dan eksternal (SO, WO, ST, WT) untuk merumuskan strategi spesifik.</p>
+                    </li>
+                    <li>
+                        <strong>Audit Strategis:</strong>
+                        <p>Meninjau apakah strategi saat ini efektif, memeriksa portofolio bisnis (terutama pada perusahaan terdiversifikasi), dan mengidentifikasi kebutuhan investasi baru.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-stairs"></i> Langkah-langkah Audit Strategis:</h2>
+                <div class="point-box">
+                    <ol>
+                        <li><strong>Perencanaan:</strong> Menetapkan ruang lingkup dan tim audit.</li>
+                        <li><strong>Pengumpulan Data:</strong> Observasi, wawancara, dan tinjauan dokumen.</li>
+                        <li><strong>Evaluasi:</strong> Membandingkan kinerja aktual dengan standar/regulasi.</li>
+                        <li><strong>Pelaporan:</strong> Memberikan rekomendasi perbaikan strategi kepada manajemen puncak.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-gears"></i> PROSES PELAKSANAAN AUDIT</h2>
+                <ol>
+                    <li>
+                        <strong>Audit Sumber Daya</strong>
+                        <p>Audit sumber daya mengidentifikasi sumber daya yang tersedia bagi suatu bisnis.</p>
+                    </li>
+                    <li>
+                        <strong>Analisis Rantai Nilai</strong>
+                        <p>Analisis rantai nilai menggambarkan aktivitas yang terjadi dalam suatu bisnis dan menghubungkannya dengan analisis kekuatan kompetitif bisnis tersebut.</p>
+                    </li>
+                    <li>
+                        <strong>Analisis Kompetensi Inti</strong>
+                        <p>Kompetensi inti adalah kemampuan yang sangat penting bagi suatubisnis untuk mencapai keunggulan kompetitif.</p>
+                    </li>
+                    <li>
+                        <strong>Analisis Kinerja</strong>
+                        <p>Audit sumber daya, analisis rantai nilai, dan analisis kompetensi inti membantu mendefinisikan kemampuan strategis suatu bisnis.</p>
+                    </li>
+                    <li>
+                        <strong>Analisis Portofolio</strong>
+                        <p>Analisis portofolio menganalisis keseimbangan keseluruhan unit bisnia strategis suatu perusahaan</p>
+                    </li>
+                    <li>
+                        <strong>Analisis SWOT</strong>
+                        <p>SWOT adalah singkatan dari kekuatan, kelemahan, peluang, dan ancaman.</p>
+                    </li>
+                </ol>
+            </section>
+
+            <div class="divider reveal"></div>
+            
+            <footer class="reveal">
+                &copy; 2026 Miranda - Manajemen Strategi | All Rights Reserved
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

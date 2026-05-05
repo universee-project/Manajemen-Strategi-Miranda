@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 5: Analisis SWOT | Miranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-pink: #ff4081;
+            --deep-berry: #6a1b9a;
+            --soft-lavender: #e1bee7;
+            --text-dark: #512da8;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffd1dc 50%, #e1bee7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 5px; 
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: 45px; 
+            border-radius: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.1);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--deep-berry);
+            font-weight: 800;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        .materi-label {
+            font-weight: 800; 
+            font-size: 0.7em; 
+            color: var(--deep-berry); 
+            letter-spacing: 1.5px; 
+            opacity: 0.6;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .material-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(106, 27, 154, 0.05);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chapter-tag {
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        h2 {
+            color: var(--deep-berry);
+            font-weight: 800;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+
+        h2 i {
+            color: var(--primary-pink);
+        }
+
+        h3 {
+            color: var(--primary-pink);
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            opacity: 0.9;
+            text-align: left;
+        }
+
+        .point-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8em;
+            font-weight: 700;
+            opacity: 0.5;
+            color: var(--deep-berry);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { margin: 10px; top: 5px; height: 40px; }
+            .material-card { padding: 25px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <header class="top-bar">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </a>
+        <div class="materi-label">MATERI 5</div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="material-card">
+            <div class="header-section reveal">
+                <span class="chapter-tag">Materi 5</span>
+                <h1>Analisis SWOT</h1>
+            </div>
+
+            <div class="divider reveal"></div>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-chart-pie"></i> ANALISIS SWOT</h2>
+                <p>Analisis SWOT adalah alat perencanaan strategis untuk mengevaluasi Kekuatan (Strengths), Kelemahan (Weaknesses), Peluang (Opportunities), dan Ancaman (Threats). Metode ini memetakan faktor internal dan eksternal untuk merumuskan strategi bisnis, meningkatkan potensi, dan meminimalkan risiko. SWOT membantu organisasi memahami posisi kompetitif dan mengambil keputusan yang tepat.</p>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-arrows-to-dot"></i> Faktor Internal (Dapat Dikendalikan)</h2>
+                <ul>
+                    <li><strong>Strengths (Kekuatan):</strong> Keunggulan unik, aset, kapabilitas, atau proses yang membuat bisnis lebih baik dari pesaing. Contoh: Tim yang solid, reputasi merek yang baik, teknologi paten.</li>
+                    <li><strong>Weaknesses (Kelemahan):</strong> Kekurangan atau keterbatasan internal yang menghambat kinerja, seperti kekurangan anggaran, teknologi usang, atau kurangnya tenaga ahli.</li>
+                </ul>
+
+                <h2><i class="fa-solid fa-earth-americas"></i> Faktor Eksternal (Di Luar Kendali)</h2>
+                <ul>
+                    <li><strong>Opportunities (Peluang):</strong> Faktor eksternal yang dapat dimanfaatkan untuk pertumbuhan atau inovasi, seperti tren pasar, kebijakan pemerintah yang mendukung, atau teknologi baru.</li>
+                    <li><strong>Threats (Ancaman):</strong> Faktor eksternal yang dapat menghambat usaha atau merugikan, contohnya persaingan ketat, perubahan regulasi, atau krisis ekonomi.</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-table-cells-large"></i> Contoh Matriks SWOT & Strategi (Contoh 2x2):</h2>
+                <div class="point-box">
+                    <ol>
+                        <li>Strategi S-O: Menggunakan kekuatan untuk memanfaatkan peluang.</li>
+                        <li>Strategi W-O: Mengatasi kelemahan dengan memanfaatkan peluang.</li>
+                        <li>Strategi S-T: Menggunakan kekuatan untuk mengatasi ancaman.</li>
+                        <li>Strategi W-T: Meminimalkan kelemahan dan menghindari ancaman.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-wand-magic-sparkles"></i> CARA MELAKUKAN ANALISIS SWOT</h2>
+                <ol>
+                    <li>Pertimbangkan factor internal</li>
+                    <li>Evaluasi factor eksternal</li>
+                    <li>Kerja sama tim membuat mimpi menjadi kenyataan</li>
+                    <li>Jadilah kreatif</li>
+                    <li>Urutkan ide</li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-circle-question"></i> MENGAPA ANALISIS SWOT PENTING</h2>
+                <ul>
+                    <li>Mengidentifikasi area peluang</li>
+                    <li>Mengidentifikasi area yang dapat ditingkatkan</li>
+                    <li>Mengidentifikasi area yang mungkin beresiko</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-award"></i> MANFAAT ANALISIS SWOT</h2>
+                <ol>
+                    <li>Pemahaman yang mendalam tentang keadaan internal dan eksternal</li>
+                    <li>Identifikasi keunggulan kompetitif</li>
+                    <li>Penemuan peluang baru</li>
+                    <li>Pengelolaan risiko</li>
+                    <li>Pengambilan keputusan yang lebih baik</li>
+                    <li>Perencanaan strategis yang efektif</li>
+                </ol>
+
+                <h2><i class="fa-solid fa-bullseye"></i> TUJUAN ANALISIS SWOT</h2>
+                <p>Analisis SWOT bertujuan untuk mengetahui kekuatan, kelemahan, peluang, dan ancaman dalam suatu perusahaan. Analisis ini ditujukan untuk menggambarkan situasi yang sedang dihadapi atau yang mungkin akan dihadapi oleh perusahaan.</p>
+                <p>Dengan melakukan analisis SWOT, Anda bisa mengetahui kekuatan dan kelebihan perusahaan sehingga dapat memanfaatkan hal tersebut demi kemajuan perusahaan.</p>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-sliders"></i> FAKTOR YANG MEMPENGARUHI ANALISIS SWOT</h2>
+                <ul>
+                    <li>Informasi yang akurat dan terperinci</li>
+                    <li>Keterlibatan stakeholder</li>
+                    <li>Penggunaan metode yang tepat</li>
+                    <li>Analisis yang obyektif</li>
+                    <li>Lingkungan bisnis dan factor eksternal</li>
+                    <li>Konteks dan tujuan</li>
+                </ul>
+
+                <h2><i class="fa-solid fa-list-ol"></i> 5 LANGKAH UNTUK MELAKUKAN ANALISIS SWOT</h2>
+                <ol>
+                    <li>Kumpulkan tim yang tepat</li>
+                    <li>Identifikasi kekuatan dan kelemahan internal</li>
+                    <li>Identifikasi peluang dan ancaman eksternal</li>
+                    <li>Evaluasi dan analisis</li>
+                    <li>Buat strategi dan rencana kegiatan</li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-puzzle-piece"></i> STRATEGI KOMBINASI SWOT</h2>
+                <div class="point-box">
+                    <ul>
+                        <li>Fokus pada kekuatan-peluang (S-O) untuk memperoleh alternatif ofensif dengan menggunakan kekuatan internal untuk memanfaatkan peluang eksternal.</li>
+                        <li>Fokus pada Kelemahan-ancaman (W-T) untuk memperoleh alternatif defensif dengan memanfaatkan kelemahan internal untuk mengurangi ancaman eksternal.</li>
+                        <li>Fokus pada Kekuatan-ancaman (S-T) dengan menggunakan kekuatan internal untuk mengurangi ancaman eksternal.</li>
+                        <li>Fokus pada Kelemahan-peluang (W-O) dengan menopang kelemahan internal untuk mengambil keuntungan dari kesempatan eksternal.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="divider reveal"></div>
+            
+            <footer class="reveal">
+                &copy; 2026 Miranda - Manajemen Strategi | All Rights Reserved
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

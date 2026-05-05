@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 2: Fungsi Manajemen Strategi | Miranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-pink: #ff4081;
+            --deep-berry: #6a1b9a;
+            --soft-lavender: #e1bee7;
+            --text-dark: #512da8;
+            --glass-bg: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffd1dc 50%, #e1bee7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(-30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 5px; 
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            height: 45px; 
+            border-radius: 12px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.1);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--deep-berry);
+            font-weight: 800;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 8px;
+            background: white;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        .materi-label {
+            font-weight: 800; 
+            font-size: 0.7em; 
+            color: var(--deep-berry); 
+            letter-spacing: 1.5px; 
+            opacity: 0.6;
+        }
+
+        .content-wrapper {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .material-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(106, 27, 154, 0.05);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chapter-tag {
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            font-weight: 800;
+            margin: 15px 0;
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), transparent);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        h2 {
+            color: var(--deep-berry);
+            font-weight: 800;
+            margin: 35px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+
+        h2 i {
+            color: var(--primary-pink);
+        }
+
+        h3 {
+            color: var(--primary-pink);
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            opacity: 0.9;
+            text-align: left;
+        }
+
+        .point-box {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary-pink);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8em;
+            font-weight: 700;
+            opacity: 0.5;
+            color: var(--deep-berry);
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { margin: 10px; top: 5px; height: 40px; }
+            .material-card { padding: 25px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <header class="top-bar">
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Kembali
+        </a>
+        <div class="materi-label">MATERI 2</div>
+    </header>
+
+    <main class="content-wrapper">
+        <div class="material-card">
+            <div class="header-section reveal">
+                <span class="chapter-tag">Materi 2</span>
+                <h1>Fungsi Manajemen Strategi</h1>
+            </div>
+
+            <div class="divider reveal"></div>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-gears"></i> FUNGSI MANAJEMEN STRATEGI</h2>
+                <p>Fungsi manajemen strategi adalah merumuskan, mengimplementasikan, dan mengevaluasi keputusan lintas fungsional yang memungkinkan organisasi mencapai tujuan jangka panjang secara efektif.</p>
+                
+                <div class="point-box">
+                    <ol>
+                        <li>Menentukan Arah dan Tujuan (Visi & Misi)</li>
+                        <li>Analisis Lingkungan dan (Internal & Eksternal)</li>
+                        <li>Perumusan Strategi (Strategy Implementation)</li>
+                        <li>Evaluasi dan Kontrol</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-bullseye"></i> TUJUAN MANAJEMEN STRATEGI</h2>
+                <ul>
+                    <li>Memberikan arah jangka panjang perusahaan yang bakal dicapai.</li>
+                    <li>Membantu perusahaan beradaptasi pada setiap perusahaan.</li>
+                    <li>Membuat kinerja perusahaan menjadi lebih efektif.</li>
+                    <li>Mengaplikasikan dan mengevaluasi strategi yang disepakati dengan efektif dan efisien.</li>
+                    <li>Membuat strategi baru untuk menyesuikan dengan perkembangan lingkungan eksternal.</li>
+                    <li>Meninjau ulang kelebihan dan kelemahan serta mencermati peluang dan ancaman bisnis perusahaan.</li>
+                    <li>Berinovasi pada produk dan layanan sehingga selalu disukai oleh konsumen.</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-diagram-project"></i> PROSES MANAJEMEN STRATEGI</h2>
+                <ol>
+                    <li>Tahap Formulasi</li>
+                    <li>Tahap Implementasi</li>
+                    <li>Tahap Evaluasi</li>
+                </ol>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-list-check"></i> TAHAPAN MANAJEMEN STRATEGI</h2>
+                
+                <h3>1. Pengamatan Lingkungan (Environmental Scanning)</h3>
+                <ul>
+                    <li>Menganalisis faktor internal (kekuatan dan kelemahan) serta eksternal (peluang dan ancaman) yang memengaruhi organisasi.</li>
+                    <li>Menggunakan analisis SWOT (Strengths, Weaknesses, Opportunities, Threats) untuk memetakan situasi saat ini.</li>
+                </ul>
+
+                <h3>2. Perumusan Strategi (Strategy Formulation)</h3>
+                <ul>
+                    <li>Menetapkan visi, misi, dan tujuan jangka panjang organisasi.</li>
+                    <li>Mengembangkan strategi alternatif dan memilih strategi terbaik untuk mencapai sasaran berdasarkan hasil analisis.</li>
+                </ul>
+
+                <h3>3. Impelementasi Strategy (Strategy Implementation)</h3>
+                <ul>
+                    <li>Menerapkan strategi yang telah dipilih ke dalam tindakan nyata.</li>
+                    <li>Mengembangkan anggaran, program, kebijakan, dan prosedur agar strategi dapat berjalan secara efektif.</li>
+                </ul>
+
+                <h3>4. Evaluasi Strategi dan Kontrol (Evaluation and Control)</h3>
+                <ul>
+                    <li>Memantau hasil kinerja dan melakukan evaluasi terhadap proses implementasi.</li>
+                    <li>Mengukur kinerja aktual dan mengambil tindakan korektif jika diperlukan agar tetap sesuai dengan tujuan.</li>
+                </ul>
+            </section>
+
+            <section class="reveal">
+                <h2><i class="fa-solid fa-shield-halved"></i> FUNGSI MANAJEMEN STRATEGI (LANJUTAN)</h2>
+                <ol>
+                    <li>Membantu organisasi merumuskan strategi sistematis</li>
+                    <li>Membangun komitmen kuat dalam mencapai tujuan bisnis</li>
+                    <li>Memberdayakan individu dengan mendorong partisipasi</li>
+                    <li>Mengoptimalkan laba dan pendapatan perusahaan secara efektif</li>
+                    <li>Meningkatkan kesadaran akan adanya ancaman dari luar perusahaan</li>
+                    <li>Mmbentu memahami dan strategi competitor untuk langkah antisipasi</li>
+                    <li>Meningkatkan produktivitas dan mengurangi penolakan</li>
+                </ol>
+            </section>
+
+            <div class="divider reveal"></div>
+            
+            <footer class="reveal">
+                &copy; 2026 Miranda - Manajemen Strategi | All Rights Reserved
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

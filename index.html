@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Management Dashboard | Miranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-pink: #ff4081;
+            --deep-berry: #6a1b9a;
+            --soft-lavender: #e1bee7;
+            --text-dark: #512da8;
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --sidebar-glass: rgba(255, 255, 255, 0.6);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffd1dc 50%, #e1bee7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.17, 0.89, 0.32, 1.1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 15px;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 35px;
+            padding-left: 10px;
+        }
+
+        .brand-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--deep-berry));
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+        }
+
+        .brand-text h2 { 
+            font-size: 1.1em; 
+            font-weight: 800; 
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-group { margin-bottom: 25px; }
+        .nav-label { font-size: 0.65em; text-transform: uppercase; color: var(--deep-berry); font-weight: 800; margin-bottom: 12px; padding-left: 10px; letter-spacing: 1.5px; opacity: 0.6; }
+
+        .nav-link {
+            text-decoration: none; display: flex; align-items: center; gap: 12px;
+            padding: 12px 15px; color: var(--deep-berry); border-radius: 15px;
+            font-weight: 700; font-size: 0.85em; margin-bottom: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover { background: rgba(255, 255, 255, 0.5); transform: translateX(5px); }
+        .nav-link.active { 
+            background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry)); 
+            color: white; 
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.3); 
+        }
+
+        .main-panel { flex: 1; display: flex; flex-direction: column; overflow-y: auto; scroll-behavior: smooth; }
+
+        .top-bar {
+            height: 70px; 
+            background: rgba(255, 255, 255, 0.5); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            display: flex; align-items: center;
+            justify-content: space-between; 
+            padding: 0 25px; 
+            position: sticky; top: 15px; 
+            margin: 0 30px;
+            z-index: 90;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+        }
+
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(106, 27, 154, 0.15); backdrop-filter: blur(10px);
+            display: none; align-items: center; justify-content: center; z-index: 2000;
+        }
+
+        .id-card {
+            background: white; width: 320px; border-radius: 30px; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(106, 27, 154, 0.2); animation: idPop 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+        }
+
+        @keyframes idPop { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card-top { height: 100px; background: linear-gradient(135deg, var(--primary-pink), var(--deep-berry)); position: relative; }
+        .close-btn { position: absolute; top: 15px; right: 15px; color: white; cursor: pointer; font-size: 1.2em; }
+
+        .content { padding: 40px 30px; max-width: 1200px; margin: 0 auto; width: 100%; flex: 1; }
+
+        .welcome-msg { 
+            margin-bottom: 25px; 
+            text-align: center; 
+            background: transparent; 
+            box-shadow: none; 
+            padding: 20px 0 10px 0; 
+        }
+
+        .welcome-msg h1 { 
+            font-size: 3em; 
+            font-weight: 800; 
+            background: linear-gradient(to right, var(--deep-berry), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .welcome-msg p { 
+            font-size: 1.1em; 
+            color: var(--deep-berry); 
+            font-weight: 600; 
+            opacity: 0.8; 
+        }
+
+        .title-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-pink), var(--deep-berry), transparent);
+            width: 100%;
+            margin-bottom: 25px;
+            opacity: 0.6;
+        }
+
+        .identity-box {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px; 
+            margin-bottom: 15px; 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+            justify-content: flex-start;
+            gap: 15px;
+            width: 100%; 
+            box-shadow: 0 8px 32px rgba(106, 27, 154, 0.05);
+        }
+
+        .extra-info-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .small-id-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 20px rgba(106, 27, 154, 0.03);
+        }
+
+        .small-id-box i {
+            color: var(--primary-pink);
+            font-size: 1.1em;
+            width: 25px;
+            text-align: center;
+        }
+
+        .id-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .id-item i {
+            font-size: 1.1em;
+            color: var(--primary-pink);
+            width: 30px;
+            text-align: center;
+        }
+
+        .id-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .id-text span {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            opacity: 0.6;
+            color: var(--deep-berry);
+        }
+
+        .id-text b {
+            font-size: 0.85em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 35px; }
+        .stat-card { background: var(--glass-bg); backdrop-filter: blur(10px); padding: 22px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.5); display: flex; align-items: center; gap: 15px; }
+        .stat-card i { width: 42px; height: 42px; background: white; color: var(--primary-pink); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2em; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .stat-info h5 { font-size: 1em; font-weight: 800; color: var(--deep-berry); }
+        .stat-info p { font-size: 0.75em; color: var(--text-dark); font-weight: 600; opacity: 0.7; }
+
+        .instruction-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            color: var(--primary-pink);
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chapters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .chapter-card { 
+            text-decoration: none; background: var(--glass-bg); backdrop-filter: blur(10px); padding: 25px; 
+            border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.5); 
+            display: flex; flex-direction: column; gap: 12px; position: relative; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .chapter-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.7); border-color: var(--primary-pink); box-shadow: 0 15px 30px rgba(255, 64, 129, 0.1); }
+        
+        .chapter-card h3 { color: var(--deep-berry); font-size: 1.15em; font-weight: 800; padding-right: 30px; }
+        .chapter-card p { color: var(--text-dark); font-size: 0.85em; line-height: 1.6; opacity: 0.8; }
+        
+        .chapter-tag { font-size: 0.65em; background: linear-gradient(45deg, var(--primary-pink), var(--deep-berry)); color: white; padding: 5px 12px; border-radius: 50px; font-weight: 800; width: fit-content; }
+        
+        .go-btn { 
+            position: absolute; top: 25px; right: 25px; width: 32px; height: 32px; 
+            background: white; color: var(--primary-pink); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; font-size: 0.8em;
+            transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .chapter-card:hover .go-btn { background: var(--primary-pink); color: white; transform: rotate(-45deg); }
+
+        footer { text-align: center; padding: 40px; color: var(--deep-berry); font-size: 0.8em; font-weight: 700; opacity: 0.5; }
+
+        @media (max-width: 1024px) { 
+            .sidebar { display: none; } 
+            .top-bar { margin: 15px; } 
+            .content { padding: 20px; } 
+            .extra-info-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="modal-overlay" id="profileModal">
+        <div class="id-card">
+            <div class="card-top">
+                <i class="fa-solid fa-xmark close-btn" onclick="toggleModal()"></i>
+            </div>
+            <div class="card-main">
+                <div class="card-img">
+                    <div class="inner"><i class="fa-solid fa-crown"></i></div>
+                </div>
+                <h2>Miranda</h2>
+                <span class="npm-tag">NPM 202305028</span>
+                <div class="card-details">
+                    <div class="detail-row"><span>Semester</span> <b>6 (ENAM)</b></div>
+                    <div class="detail-row"><span>Status</span> <b>Mahasiswa Aktif</b></div>
+                    <div class="detail-row"><span>Tahun Akademik</span> <b>2026</b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon"><i class="fa-solid fa-gem"></i></div>
+            <div class="brand-text"><h2>MIRANDA.</h2></div>
+        </div>
+        <div class="nav-group">
+            <div class="nav-label">Navigation</div>
+            <a href="#" class="nav-link active"><i class="fa-solid fa-house"></i> Dashboard</a>
+            <a href="bab1.html" class="nav-link"><i class="fa-solid fa-book-open"></i> Full Material</a>
+        </div>
+        <div class="nav-group" style="margin-top: 10px;">
+            <div class="nav-label">Modules Content</div>
+            <a href="bab1.html" class="nav-link"><i class="fa-solid fa-1"></i> Bab 01 Dasar</a>
+            <a href="bab2.html" class="nav-link"><i class="fa-solid fa-2"></i> Bab 02 Fungsi</a>
+            <a href="bab3.html" class="nav-link"><i class="fa-solid fa-3"></i> Bab 03 Visi Misi</a>
+            <a href="bab4.html" class="nav-link"><i class="fa-solid fa-4"></i> Bab 04 Audit</a>
+            <a href="bab5.html" class="nav-link"><i class="fa-solid fa-5"></i> Bab 05 Analisis</a>
+        </div>
+    </aside>
+
+    <main class="main-panel" id="scrollContainer">
+        <header class="top-bar">
+            <div style="font-weight: 800; color: var(--deep-berry); font-size: 0.75em; letter-spacing: 1px; opacity: 0.6;">MIRANDA</div>
+            <div style="font-weight: 800; color: var(--deep-berry); font-size: 0.75em; letter-spacing: 1px; opacity: 0.6;">MANAJEMEN STRATEGI</div>
+        </header>
+
+        <section class="content">
+            <div class="welcome-msg reveal">
+                <h1>MANAJEMEN STRATEGI</h1>
+                <p>Silakan akses materi di bawah ini untuk membaca konten lengkap.</p>
+            </div>
+
+            <div class="title-divider reveal"></div>
+
+            <div class="identity-box reveal">
+                <div class="id-item">
+                    <i class="fa-solid fa-signature"></i>
+                    <div class="id-text">
+                        <span>Nama Lengkap</span>
+                        <b>Miranda</b>
+                    </div>
+                </div>
+                <div class="id-item">
+                    <i class="fa-solid fa-id-badge"></i>
+                    <div class="id-text">
+                        <span>NPM</span>
+                        <b>202305028</b>
+                    </div>
+                </div>
+                <div class="id-item">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <div class="id-text">
+                        <span>Semester</span>
+                        <b>6 (Enam)</b>
+                    </div>
+                </div>
+                <div class="id-item">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <div class="id-text">
+                        <span>Tahun</span>
+                        <b>Akademik 2026</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="extra-info-row reveal">
+                <div class="small-id-box">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <div class="id-text">
+                        <span>Dosen Pengampu</span>
+                        <b>TIKA OKATARINA, S.Pd., M.Ak.</b>
+                    </div>
+                </div>
+                <div class="small-id-box">
+                    <i class="fa-solid fa-university"></i>
+                    <div class="id-text">
+                        <span>Perguruan Tinggi</span>
+                        <b>UNIVERSITAS PAT PETULAI</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-row reveal">
+                <div class="stat-card">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <div class="stat-info"><h5>05 MATERI</h5><p>Total Materi</p></div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-circle-check" style="color: #00c853;"></i>
+                    <div class="stat-info"><h5>Verified</h5><p>Status Tugas</p></div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-calendar-days" style="color: var(--deep-berry);"></i>
+                    <div class="stat-info"><h5>Semester 6</h5><p>Periode 2026</p></div>
+                </div>
+            </div>
+
+            <div class="instruction-label reveal">
+                <i class="fa-solid fa-star"></i> pilih materi untuk membaca lengkap
+            </div>
+
+            <div class="chapters-grid">
+                <a href="bab1.html" class="chapter-card reveal">
+                    <span class="chapter-tag">Materi 01</span>
+                    <h3>Pengantar Manajemen Strategi</h3>
+                    <p>Definisi, ruang lingkup, proses, dan pentingnya manajemen strategi bagi organisasi modern.</p>
+                    <div class="go-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="bab2.html" class="chapter-card reveal">
+                    <span class="chapter-tag">Materi 02</span>
+                    <h3>Fungsi Manajemen Strategi</h3>
+                    <p>Perencanaan, pengorganisasian, pelaksanaan, pengendalian, dan fungsi inovasi strategis.</p>
+                    <div class="go-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="bab3.html" class="chapter-card reveal">
+                    <span class="chapter-tag">Materi 03</span>
+                    <h3>Komponen Visi, Misi & tujuan</h3>
+                    <p>Rumusan visi, 9 komponen misi Fred R. David, dan penentuan tujuan SMART perusahaan.</p>
+                    <div class="go-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="bab4.html" class="chapter-card reveal">
+                    <span class="chapter-tag">Materi 04</span>
+                    <h3>Audit Strategi & Lingkungan Bisnis</h3>
+                    <p>Internal audit, PESTEL, Porter's Five Forces, Matriks EFE dan IFE secara komprehensif.</p>
+                    <div class="go-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="bab5.html" class="chapter-card reveal">
+                    <span class="chapter-tag">Materi 05</span>
+                    <h3>Analisis SWOT</h3>
+                    <p>Komponen S-W-O-T, matriks TOWS, dan langkah praktis pembuatan strategi turunan.</p>
+                    <div class="go-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 Miranda - Manajemen Strategi | All Rights Reserved 
+        </footer>
+    </main>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('profileModal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        const observerOptions = {
+            root: document.getElementById('scrollContainer'),
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
